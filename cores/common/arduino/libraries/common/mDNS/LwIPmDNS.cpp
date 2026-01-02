@@ -89,7 +89,7 @@ static void mdnsTxtCallback(struct mdns_service *service, void *userdata) {
 	for (const auto &record : sCachedServices[index].records) {
 		err_t err = mdns_resp_add_service_txtitem(service, record, strlen(record));
 		if (err != ERR_OK) {
-			LT_DM(MDNS, "Error %d while adding txt record: %s", err, record);
+			LT_WM(MDNS, "Error %d while adding to txt record: %s", err, record);
 		}
 	}
 }
@@ -131,7 +131,7 @@ static void addServices(struct netif *netif) {
 		);
 
 		if (slot < 0) {
-			LT_DM(MDNS, "mdns_resp_add_service returned error %d", slot);
+			LT_WM(MDNS, "mdns_resp_add_service returned error %d", slot);
 		}
 	}
 }
@@ -244,7 +244,7 @@ bool mDNS::addServiceImpl(const char *name, const char *service, uint8_t proto, 
 			);
 
 			if (slot < 0) {
-				LT_DM(MDNS, "mdns_resp_add_service returned error %d", slot);
+				LT_WM(MDNS, "mdns_resp_add_service returned error %d", slot);
 			}
 
 			added = true;
